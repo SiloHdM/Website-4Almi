@@ -1,0 +1,154 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-4almi.png';
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="brand">
+      <Image src={logo} alt="4Almi" width={180} />
+      <p>{site.claim}</p>
+    </div>
+
+    <div>
+      <h2 class="footer-title">Adresse</h2>
+      <address>
+        {site.street}<br />
+        {site.zip} {site.city}
+      </address>
+    </div>
+
+    <div>
+      <h2 class="footer-title">Öffnungszeiten</h2>
+      <p>Mo–Sa 9:30–0:00 Uhr<br />Sonntag geschlossen</p>
+    </div>
+
+    <div>
+      <h2 class="footer-title">Folgen</h2>
+      <ul class="socials">
+        {
+          site.socials.map((s) => (
+            <li>
+              <a href={s.url} target="_blank" rel="noopener">
+                <Icon name={s.label === 'TikTok' ? 'tiktok' : 'instagram'} />
+                {s.label} {s.handle}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <p>© {new Date().getFullYear()} 4Almi Kiosk, Ludwigsburg</p>
+    <ul>
+      <li><a href="/impressum">Impressum</a></li>
+      <li><a href="/datenschutz">Datenschutz</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-top: clamp(4rem, 8vw, 6rem);
+    border-top: 1px solid var(--line);
+    background: linear-gradient(to bottom, var(--black), #050a10);
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .brand :global(img) {
+    width: 170px;
+  }
+
+  .brand p {
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-stretch: 110%;
+    font-weight: 800;
+    font-size: 1.25rem;
+  }
+
+  .footer-title {
+    margin-bottom: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  .socials {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .socials a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding-block: 0.35rem;
+    text-decoration: none;
+  }
+
+  .socials a:hover {
+    color: var(--blue-light);
+  }
+
+  .socials :global(svg) {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 4rem;
+    padding-block: 1.75rem 6rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .footer-bottom ul {
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer-bottom a {
+    display: inline-block;
+    padding-block: 0.25rem;
+  }
+
+  .footer-bottom a:hover {
+    color: #fff;
+  }
+
+  @media (min-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    }
+
+    .footer-bottom {
+      padding-bottom: 2rem;
+    }
+  }
+</style>

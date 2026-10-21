@@ -1,0 +1,32 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../data/site';
+---
+
+<Legal title="Impressum">
+  <h2>Angaben gemäß § 5 DDG</h2>
+  <p>
+    4Almi Kiosk<br />
+    Inhaber: {site.ownerLegal}<br />
+    {site.street}<br />
+    {site.zip} {site.city}
+  </p>
+
+  <h2>Kontakt</h2>
+  <p>
+    Telefon: <span class="todo">{site.phone}</span><br />
+    E-Mail: <span class="todo">{site.email}</span>
+  </p>
+
+  <h2>Umsatzsteuer-ID</h2>
+  <p>
+    Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:
+    <span class="todo">{site.vatId}</span>
+  </p>
+
+  <h2>Verbraucherstreitbeilegung</h2>
+  <p>
+    Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+    Verbraucherschlichtungsstelle teilzunehmen.
+  </p>
+</Legal>
