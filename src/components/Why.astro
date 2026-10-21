@@ -1,0 +1,162 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-4almi.png';
+
+const reasons = [
+  {
+    title: 'Damit Ludwigsburg jederzeit zufrieden ist.',
+    text: 'Die langen Öffnungszeiten sind ein Versprechen an die Stadt: Montag bis Samstag bis 0 Uhr. Keine Minute früher.',
+    color: 'blue',
+  },
+  {
+    title: 'Damit sich jeder bis 0 Uhr wohlfühlt.',
+    text: 'Feierabend, Heimweg oder Mitternachtssnack: Wer reinkommt, soll sich willkommen fühlen, bis Mitternacht.',
+    color: 'red',
+  },
+  {
+    title: 'Damit ein Vibe in die Stadt kommt, der Menschen verbindet.',
+    text: 'Kundschaft aus der ganzen Region, eine Community auf TikTok und Instagram und 4Almi auf den Trikots lokaler Fußballmannschaften. 4Almi ist ein Teil von Ludwigsburg.',
+    color: 'blue',
+  },
+];
+---
+
+<section class="section why" id="warum" aria-labelledby="warum-title">
+  <div class="wrap">
+    <h2 class="section-title" id="warum-title">
+      Warum <Image class="inline-logo" src={logo} alt="4Almi" width={420} />?
+    </h2>
+    <p class="section-lead">
+      Almi hat den Laden nicht nur aufgemacht, um Sachen zu verkaufen. Er hat ihn aufgemacht, damit
+      in Ludwigsburg etwas zusammenkommt.
+    </p>
+
+    <!-- TODO: Namensgeschichte mit Almi bestätigen (erfunden nach Vorgabe, Grundlage: Anfangsbuchstaben der Tochter) -->
+    <div class="name reveal">
+      <Image class="name-logo" src={logo} alt="" width={520} />
+      <div>
+        <h3>Woher kommt der Name?</h3>
+        <p>
+          Hinter 4Almi steckt Familie. Der Name ist aus den Anfangsbuchstaben von Almis Tochter
+          entstanden. So trägt der Laden sie jeden Tag mit: auf dem Schild über der Tür und auf den
+          Trikots in der ganzen Region.
+        </p>
+      </div>
+    </div>
+
+    <ul class="reasons">
+      {
+        reasons.map((r) => (
+          <li class:list={['reason', 'reveal', `reason-${r.color}`]}>
+            <h3>{r.title}</h3>
+            <p>{r.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .why {
+    background:
+      radial-gradient(60rem 30rem at 100% 0%, rgb(0 120 180 / 0.16), transparent 70%),
+      radial-gradient(50rem 30rem at 0% 100%, rgb(216 36 36 / 0.1), transparent 70%);
+  }
+
+  .name {
+    display: grid;
+    gap: 1.5rem;
+    align-items: center;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border-radius: var(--radius);
+    background: var(--raised);
+    border: 1px solid var(--line);
+  }
+
+  .name :global(.name-logo) {
+    width: clamp(11rem, 26vw, 16rem);
+    height: auto;
+  }
+
+  .name h3 {
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  }
+
+  .name p {
+    margin-top: 0.6rem;
+    max-width: 56ch;
+    color: var(--muted);
+    font-size: clamp(1.0625rem, 1.5vw, 1.2rem);
+  }
+
+  @media (min-width: 900px) {
+    .name {
+      grid-template-columns: auto 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .reasons {
+    display: grid;
+    margin: clamp(2rem, 5vw, 3rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .reason {
+    display: grid;
+    gap: 0.9rem;
+    padding-block: clamp(1.75rem, 4vw, 2.75rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .reason:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .reason h3 {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: clamp(1.75rem, 4.2vw, 3.25rem);
+    max-width: 22ch;
+  }
+
+  .reason h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.12em;
+    bottom: 0.12em;
+    width: 6px;
+    border-radius: 3px;
+  }
+
+  .reason-blue h3::before {
+    background: var(--blue);
+  }
+
+  .reason-red h3::before {
+    background: var(--red);
+  }
+
+  .reason p {
+    padding-left: 1.4rem;
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: clamp(1.0625rem, 1.5vw, 1.2rem);
+  }
+
+  @media (min-width: 900px) {
+    .reason {
+      grid-template-columns: 1.3fr 1fr;
+      gap: 3rem;
+      align-items: end;
+    }
+
+    .reason p {
+      padding-left: 0;
+    }
+  }
+</style>

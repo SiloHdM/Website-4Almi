@@ -1,0 +1,212 @@
+---
+import { Picture } from 'astro:assets';
+import nacht from '../assets/media/ladenfront-nacht.jpeg';
+import Icon from './Icon.astro';
+import WoltLabel from './WoltLabel.astro';
+import { site } from '../data/site';
+---
+
+<section class="section visit" id="besuch" aria-labelledby="besuch-title">
+  <div class="wrap visit-grid">
+    <figure class="night">
+      <Picture
+        src={nacht}
+        formats={['avif', 'webp']}
+        widths={[480, 900]}
+        sizes="(min-width: 900px) 40vw, 100vw"
+        alt="Der beleuchtete 4Almi-Laden bei Nacht, von der Straße aus gesehen"
+      />
+    </figure>
+
+    <div class="info">
+      <h2 class="section-title" id="besuch-title">Komm vorbei</h2>
+
+      <div class="facts">
+        <div class="fact">
+          <Icon name="map-pin" class="fact-icon" />
+          <address>
+            4Almi<br />
+            {site.street}<br />
+            {site.zip} {site.city}
+          </address>
+        </div>
+
+        <div class="fact">
+          <Icon name="clock" class="fact-icon" />
+          <dl class="hours">
+            {
+              site.hours.map((h) => (
+                <div>
+                  <dt>{h.days}</dt>
+                  <dd>{h.time}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+
+        <div class="fact">
+          <Icon name="ticket" class="fact-icon" />
+          <p>Lotto-Annahmestelle und Hermes Paketshop im Laden.</p>
+        </div>
+      </div>
+
+      <div class="visit-ctas">
+        <a class="btn btn-blue" href={site.maps} target="_blank" rel="noopener">
+          <Icon name="map" />
+          Route planen
+        </a>
+        <a class="btn btn-red" href={site.wolt} target="_blank" rel="noopener">
+          <WoltLabel />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="map" data-map>
+      <div class="map-consent">
+        <Icon name="map" class="map-icon" />
+        <p>
+          Die Karte kommt von Google Maps. Erst wenn du sie lädst, werden Daten an Google
+          übertragen. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.
+        </p>
+        <button class="btn btn-ghost" type="button" data-map-load>Karte laden</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { site } from '../data/site';
+
+  const map = document.querySelector<HTMLElement>('[data-map]');
+  map?.querySelector('[data-map-load]')?.addEventListener('click', () => {
+    const iframe = document.createElement('iframe');
+    iframe.src = site.mapsEmbed;
+    iframe.title = 'Karte: 4Almi, Lindenstraße 8, 71634 Ludwigsburg';
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    map.replaceChildren(iframe);
+    map.classList.add('is-loaded');
+  });
+</script>
+
+<style>
+  .visit-grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .night {
+    margin: 0;
+  }
+
+  .night :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .facts {
+    display: grid;
+    gap: 1.75rem;
+    margin-top: 2.5rem;
+  }
+
+  .fact {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.125rem;
+  }
+
+  .fact :global(.fact-icon) {
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: 0.2rem;
+    color: var(--blue-light);
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  .hours {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hours div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1rem;
+  }
+
+  .hours dt {
+    min-width: 10.5rem;
+  }
+
+  .hours dd {
+    margin: 0;
+    font-weight: 650;
+  }
+
+  .visit-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+  }
+
+  .map {
+    display: grid;
+    margin-top: clamp(3rem, 7vw, 5rem);
+    min-height: 22rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background:
+      repeating-linear-gradient(0deg, rgb(255 255 255 / 0.03) 0 1px, transparent 1px 48px),
+      repeating-linear-gradient(90deg, rgb(255 255 255 / 0.03) 0 1px, transparent 1px 48px),
+      var(--raised);
+  }
+
+  .map-consent {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 1.25rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  .map-consent p {
+    max-width: 44ch;
+    color: var(--muted);
+  }
+
+  .map :global(.map-icon) {
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--blue-light);
+  }
+
+  .map :global(iframe) {
+    width: 100%;
+    height: 26rem;
+    border: 0;
+    filter: grayscale(0.4) contrast(1.05);
+  }
+
+  @media (min-width: 900px) {
+    .visit-grid {
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+  }
+</style>

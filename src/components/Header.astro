@@ -1,0 +1,274 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-4almi.png';
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+
+interface Props {
+  home?: boolean;
+}
+
+const { home = true } = Astro.props;
+const base = home ? '' : '/';
+
+const links = [
+  { href: `${base}#geschichte`, label: 'Geschichte' },
+  { href: `${base}#sortiment`, label: 'Sortiment' },
+  { href: `${base}#sponsoring`, label: 'Sponsoring' },
+  { href: `${base}#community`, label: 'Community' },
+  { href: `${base}#besuch`, label: 'Besuch' },
+];
+---
+
+<header class="header" data-header>
+  <div class="header-inner">
+    <a class="header-logo" href="/" aria-label="4Almi – zur Startseite">
+      <Image src={logo} alt="" width={140} loading="eager" />
+    </a>
+
+    <nav class="header-nav" id="hauptnavigation" aria-label="Hauptnavigation" data-nav>
+      <ul>
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <p class="status" data-status>
+      <span class="status-dot" aria-hidden="true"></span>
+      <span data-status-text>{site.hoursShort}</span>
+    </p>
+
+    <button
+      class="menu-btn"
+      type="button"
+      aria-expanded="false"
+      aria-controls="hauptnavigation"
+      data-menu-btn
+    >
+      <span class="visually-hidden" data-menu-label>Menü öffnen</span>
+      <Icon name="menu" class="icon-open" />
+      <Icon name="x" class="icon-close" />
+    </button>
+  </div>
+</header>
+
+<script>
+  // Öffnungsstatus live nach Berliner Zeit: Mo–Sa 9:30–24:00, So zu.
+  function updateStatus() {
+    const el = document.querySelector<HTMLElement>('[data-status]');
+    const text = document.querySelector<HTMLElement>('[data-status-text]');
+    if (!el || !text) return;
+
+    const parts = new Intl.DateTimeFormat('de-DE', {
+      timeZone: 'Europe/Berlin',
+      weekday: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23',
+    }).formatToParts(new Date());
+    const get = (type: string) => parts.find((p) => p.type === type)?.value ?? '';
+    const day = get('weekday').replace('.', '');
+    const minutes = Number(get('hour')) * 60 + Number(get('minute'));
+
+    const isSunday = day === 'So';
+    const isOpen = !isSunday && minutes >= 9 * 60 + 30;
+
+    el.dataset.open = String(isOpen);
+    if (isOpen) text.textContent = 'Jetzt offen · bis 0 Uhr';
+    else if (isSunday) text.textContent = 'Heute zu · Mo ab 9:30';
+    else text.textContent = 'Gerade zu · ab 9:30';
+  }
+
+  updateStatus();
+  setInterval(updateStatus, 60_000);
+
+  // Header bekommt nach dem ersten Scrollen einen Hintergrund.
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobiles Menü
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-btn]');
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  const label = document.querySelector<HTMLElement>('[data-menu-label]');
+
+  function setMenu(open: boolean) {
+    btn?.setAttribute('aria-expanded', String(open));
+    nav?.classList.toggle('is-open', open);
+    header?.classList.toggle('menu-open', open);
+    if (label) label.textContent = open ? 'Menü schließen' : 'Menü öffnen';
+  }
+
+  btn?.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
+  nav?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) setMenu(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && btn?.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      btn.focus();
+    }
+  });
+</script>
+
+<style>
+  .header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 100;
+    transition: background-color 250ms ease;
+  }
+
+  .header.is-scrolled,
+  .header.menu-open {
+    background: rgb(0 0 0 / 0.86);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.85rem var(--gutter);
+  }
+
+  .header-logo {
+    flex: none;
+    display: block;
+    width: clamp(92px, 11vw, 128px);
+  }
+
+  .header-nav {
+    margin-left: auto;
+  }
+
+  .header-nav ul {
+    display: flex;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .header-nav a {
+    display: block;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 550;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .header-nav a:hover {
+    color: #fff;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 550;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .status-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+
+  .status[data-open='true'] .status-dot {
+    background: #3ddc84;
+    box-shadow: 0 0 0 4px rgb(61 220 132 / 0.18);
+  }
+
+  .status[data-open='false'] .status-dot {
+    background: var(--red-light);
+  }
+
+  .menu-btn {
+    display: none;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    margin-right: -0.5rem;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .menu-btn :global(svg) {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .menu-btn :global(.icon-close),
+  .menu-btn[aria-expanded='true'] :global(.icon-open) {
+    display: none;
+  }
+
+  .menu-btn[aria-expanded='true'] :global(.icon-close) {
+    display: block;
+  }
+
+  @media (max-width: 899px) {
+    .menu-btn {
+      display: grid;
+    }
+
+    .status {
+      margin-left: auto;
+      font-size: 0.8125rem;
+      padding: 0.4rem 0.75rem;
+    }
+
+    .header-nav {
+      position: absolute;
+      inset: 100% 0 auto;
+      display: none;
+      margin: 0;
+      padding: 0.5rem var(--gutter) 1.25rem;
+      background: rgb(0 0 0 / 0.94);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-nav.is-open {
+      display: block;
+    }
+
+    .header-nav ul {
+      flex-direction: column;
+    }
+
+    .header-nav a {
+      padding: 0.9rem 0;
+      font-family: var(--font-display);
+      font-stretch: 112%;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+  }
+
+  @media (max-width: 379px) {
+    .status {
+      display: none;
+    }
+
+    .menu-btn {
+      margin-left: auto;
+    }
+  }
+</style>

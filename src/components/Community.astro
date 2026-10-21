@@ -1,0 +1,206 @@
+---
+import { Picture } from 'astro:assets';
+import graffiti from '../assets/media/graffiti-chill-mal-ludwigsburg.jpeg';
+import hoodie from '../assets/media/hoodie-chill-mal-ludwigsburg.jpeg';
+import Icon from './Icon.astro';
+
+const channels = [
+  {
+    icon: 'tiktok',
+    handle: '@4almilb',
+    text: 'Kiosk-Alltag und Comedy auf TikTok',
+    url: 'https://www.tiktok.com/@4almilb',
+    cta: 'Auf TikTok ansehen',
+  },
+  {
+    icon: 'tiktok',
+    handle: '@4_almi',
+    text: 'Noch mehr Almi auf TikTok',
+    url: 'https://www.tiktok.com/@4_almi',
+    cta: 'Auf TikTok ansehen',
+  },
+  {
+    icon: 'instagram',
+    handle: '@4_almi',
+    text: '4Almi auf Instagram',
+    url: 'https://www.instagram.com/4_almi/',
+    cta: 'Auf Instagram folgen',
+  },
+] as const;
+---
+
+<section class="section community" id="community" aria-labelledby="community-title">
+  <div class="wrap">
+    <figure class="banner">
+      <Picture
+        src={graffiti}
+        formats={['avif', 'webp']}
+        widths={[800, 1600]}
+        sizes="(min-width: 76rem) 76rem, 100vw"
+        alt="Graffiti mit dem Schriftzug „Chill mal Ludwigsburg“ in Blau und Rot"
+      />
+    </figure>
+
+    <div class="community-grid">
+      <div>
+        <h2 class="section-title" id="community-title">Nicht nur ein Kiosk. Eine Community.</h2>
+        <p class="section-lead">
+          Die meisten kennen 4Almi zuerst vom Handy. Auf TikTok und Instagram zeigt Almi den
+          Kiosk-Alltag, mit viel Humor. Und dann kommen die Leute vorbei, aus der ganzen Region.
+        </p>
+
+        <ul class="channels">
+          {
+            channels.map((c) => (
+              <li>
+                <a class="channel" href={c.url} target="_blank" rel="noopener">
+                  <Icon name={c.icon} class="channel-icon" />
+                  <span class="channel-text">
+                    <strong>{c.handle}</strong>
+                    <span>{c.text}</span>
+                  </span>
+                  <span class="visually-hidden">{c.cta} (öffnet in neuem Tab)</span>
+                  <Icon name="external" class="channel-out" />
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <div class="channel channel-soon">
+              <Icon name="mic" class="channel-icon" />
+              <span class="channel-text">
+                <strong>Podcast „Was geht Almi“</strong>
+                <span>@wasgehtalmi</span>
+              </span>
+              <span class="soon">Bald verfügbar</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <figure class="hoodie">
+        <Picture
+          src={hoodie}
+          formats={['avif', 'webp']}
+          widths={[480, 800]}
+          sizes="(min-width: 900px) 34vw, 100vw"
+          alt="Person im schwarzen Hoodie mit dem Rückenaufdruck „Chill mal Ludwigsburg“ im Laden"
+        />
+        <figcaption>Chill mal, Ludwigsburg.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .banner {
+    margin: 0 0 clamp(3rem, 7vw, 5rem);
+  }
+
+  .banner :global(img) {
+    width: 100%;
+    aspect-ratio: 5 / 2;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .community-grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .channels {
+    display: grid;
+    gap: 0.75rem;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .channel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 4.5rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition:
+      border-color 150ms ease,
+      background-color 150ms ease;
+  }
+
+  a.channel:hover {
+    border-color: var(--blue);
+    background: rgb(0 120 180 / 0.12);
+  }
+
+  .channel :global(.channel-icon) {
+    flex: none;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .channel-text {
+    display: grid;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .channel-text strong {
+    font-size: 1.125rem;
+  }
+
+  .channel-text span {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .channel :global(.channel-out) {
+    flex: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--muted);
+  }
+
+  .channel-soon {
+    border-style: dashed;
+  }
+
+  .soon {
+    flex: none;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 650;
+    white-space: nowrap;
+  }
+
+  .hoodie {
+    margin: 0;
+  }
+
+  .hoodie :global(img) {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .hoodie figcaption {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 900px) {
+    .community-grid {
+      grid-template-columns: 1.4fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+  }
+</style>

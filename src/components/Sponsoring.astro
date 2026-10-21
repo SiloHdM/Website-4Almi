@@ -1,0 +1,172 @@
+---
+import { Picture } from 'astro:assets';
+import trikotRot from '../assets/media/sponsoring-trikot-rot.jpeg';
+import trikotBlau from '../assets/media/sponsoring-trikot-blau.jpeg';
+import teamBlauGelb from '../assets/media/sponsoring-team-blau-gelb.jpeg';
+import jugendBlau from '../assets/media/sponsoring-jugend-blau.jpeg';
+import teamBlauWeiss from '../assets/media/sponsoring-team-blau-weiss.jpeg';
+import trikotWeiss from '../assets/media/sponsoring-trikot-weiss.jpg';
+import ladenfront from '../assets/media/sponsoring-trikots-ladenfront.jpeg';
+import Icon from './Icon.astro';
+
+// Bewusst ohne Vereinsnamen: Die Wappen sind auf den Fotos nicht sicher lesbar.
+const photos = [
+  { src: teamBlauGelb, alt: 'Mannschaftsfoto eines Teams in blauen 4Almi-Trikots vor einem Fußballplatz', caption: 'Ganze Mannschaft, ein Logo auf der Brust' },
+  { src: trikotRot, alt: 'Almi und ein Spieler halten ein rot-schwarzes Trikot mit 4Almi-Logo im Laden', caption: 'Trikotübergabe im Laden' },
+  { src: jugendBlau, alt: 'Jugendmannschaft in blauen Trikots mit 4Almi-Logo auf dem Kunstrasen', caption: 'Für die Jugend auf dem Platz' },
+  { src: trikotBlau, alt: 'Almi und ein Trainer halten ein blaues uhlsport-Trikot mit 4Almi-Logo', caption: 'Neue Trikots, frisch aus dem Laden' },
+  { src: teamBlauWeiss, alt: 'Mannschaft in blau-weiß gestreiften Trikots mit 4Almi-Logo auf einer Tribüne', caption: 'Blau-weiß, mit 4Almi vorne drauf' },
+  { src: trikotWeiss, alt: 'Almi und ein Trainer halten ein weißes Trikot mit 4Almi-Logo', caption: 'Handschlag auf die Zusammenarbeit' },
+  { src: ladenfront, alt: 'Almi und ein Spieler mit einem blauen und einem gelben 4Almi-Trikot vor dem Laden', caption: 'Direkt vor der Ladentür' },
+];
+---
+
+<section class="section sponsoring" id="sponsoring" aria-labelledby="sponsoring-title">
+  <div class="wrap">
+    <h2 class="section-title" id="sponsoring-title">Teil der Stadt. Auch auf dem Platz.</h2>
+    <div class="intro">
+      <p class="section-lead">
+        Fußball ist in Ludwigsburg das, was der Späti am Abend ist: der Ort, an dem Leute
+        zusammenkommen, egal woher sie kommen. Deshalb steht 4Almi auf den Trikots von Mannschaften
+        aus der Region, vor allem bei der Jugend.
+      </p>
+      <p class="section-lead">
+        Wer für seinen Verein aufläuft, soll das mit Stolz tun. Und dabei ein Stück Ludwigsburg auf
+        der Brust tragen.
+      </p>
+    </div>
+  </div>
+
+  <div class="gallery-wrap">
+    <ul class="gallery" tabindex="0" aria-label="Fotos vom 4Almi-Sponsoring" data-gallery>
+      {
+        photos.map((p) => (
+          <li>
+            <figure>
+              <Picture
+                src={p.src}
+                formats={['avif', 'webp']}
+                widths={[480, 900]}
+                sizes="(min-width: 900px) 40rem, 88vw"
+                alt={p.alt}
+              />
+              <figcaption>{p.caption}</figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="wrap gallery-controls">
+      <button class="gallery-btn" type="button" data-dir="-1" aria-label="Vorheriges Foto">
+        <Icon name="chevron-left" />
+      </button>
+      <button class="gallery-btn" type="button" data-dir="1" aria-label="Nächstes Foto">
+        <Icon name="chevron-right" />
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const gallery = document.querySelector<HTMLElement>('[data-gallery]');
+  document.querySelectorAll<HTMLButtonElement>('.gallery-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (!gallery) return;
+      const item = gallery.querySelector('li');
+      const step = item ? item.getBoundingClientRect().width + 16 : gallery.clientWidth * 0.8;
+      gallery.scrollBy({ left: Number(btn.dataset.dir) * step, behavior: 'smooth' });
+    });
+  });
+</script>
+
+<style>
+  .intro {
+    display: grid;
+    gap: 0 3rem;
+  }
+
+  .gallery {
+    display: flex;
+    gap: 1rem;
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    padding: 0 var(--gutter) 1rem;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--blue) transparent;
+  }
+
+  .gallery li {
+    flex: none;
+    scroll-snap-align: start;
+  }
+
+  /* Gleiche Höhe für alle Fotos, Breite nach Hochformat oder Querformat */
+  .gallery figure {
+    margin: 0;
+    display: inline-grid;
+  }
+
+  .gallery :global(img) {
+    width: auto;
+    height: clamp(20rem, 62vw, 30rem);
+    max-width: 88vw;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .gallery figcaption {
+    width: 0;
+    min-width: 100%;
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .gallery-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .gallery-btn {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    border: 2px solid rgb(255 255 255 / 0.35);
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition:
+      border-color 150ms ease,
+      background-color 150ms ease;
+  }
+
+  .gallery-btn:hover {
+    border-color: var(--blue);
+    background: var(--blue);
+  }
+
+  .gallery-btn :global(svg) {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  @media (min-width: 900px) {
+    .intro {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .gallery {
+      padding-inline: max(var(--gutter), (100vw - var(--max)) / 2);
+      scroll-padding-inline: max(var(--gutter), (100vw - var(--max)) / 2);
+    }
+  }
+</style>

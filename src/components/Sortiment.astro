@@ -1,0 +1,249 @@
+---
+import { Picture } from 'astro:assets';
+import snacks from '../assets/media/laden-snacks-gang.jpeg';
+import drinks from '../assets/media/laden-getraenke.jpeg';
+import lotto from '../assets/media/laden-lotto.jpeg';
+import Icon from './Icon.astro';
+import WoltLabel from './WoltLabel.astro';
+import { site } from '../data/site';
+---
+
+<section class="section sortiment" id="sortiment" aria-labelledby="sortiment-title">
+  <div class="wrap">
+    <h2 class="section-title" id="sortiment-title">Was es bei Almi gibt</h2>
+    <p class="section-lead">
+      Vom Klassiker bis zum Teil, das du noch nie gesehen hast. Komm vorbei und schau selbst, was
+      gerade im Regal steht.
+    </p>
+
+    <ul class="tiles">
+      <li class="tile tile-photo tile-snacks">
+        <Picture
+          src={snacks}
+          formats={['avif', 'webp']}
+          widths={[480, 800]}
+          sizes="(min-width: 900px) 40vw, 100vw"
+          alt="Gang im Laden mit Regalen voller Chips und Süßigkeiten"
+        />
+        <div class="tile-body">
+          <h3>Snacks aus aller Welt</h3>
+          <p>Extrem scharfe Chips und Süßigkeiten-Specials, zum Beispiel japanische KitKat-Sorten.</p>
+        </div>
+      </li>
+
+      <li class="tile tile-photo tile-drinks">
+        <Picture
+          src={drinks}
+          formats={['avif', 'webp']}
+          widths={[600, 1000]}
+          sizes="(min-width: 900px) 55vw, 100vw"
+          alt="Reihe von Kühlschränken voller Getränkedosen und Flaschen"
+        />
+        <div class="tile-body">
+          <h3>Ausgefallene Drinks</h3>
+          <p>Dosen von weit her, zum Beispiel Getränke mit Basilikumsamen. Und natürlich kaltes Bier.</p>
+        </div>
+      </li>
+
+      <li class="tile tile-plain tile-coffee">
+        <Icon name="coffee" class="tile-icon" />
+        <h3>Kaffee &amp; Smoothies</h3>
+        <p>Für den Weg zur Arbeit oder den langen Abend.</p>
+      </li>
+
+      <li class="tile tile-plain tile-hermes">
+        <Icon name="package" class="tile-icon" />
+        <h3>Hermes Paketshop</h3>
+        <p>Pakete abgeben und abholen, direkt im Laden.</p>
+      </li>
+
+      <li class="tile tile-photo tile-lotto">
+        <Picture
+          src={lotto}
+          formats={['avif', 'webp']}
+          widths={[480, 800]}
+          sizes="(min-width: 900px) 30vw, 100vw"
+          alt="Lotto-Annahmestelle mit beleuchtetem Lotto-Baden-Württemberg-Schild"
+        />
+        <div class="tile-body">
+          <h3>Lotto</h3>
+          <p>Annahmestelle von Lotto Baden-Württemberg.</p>
+        </div>
+      </li>
+    </ul>
+
+    <p class="adult">
+      Außerdem: Tabak und Shisha-Zubehör. <strong>Nur ab 18 Jahren.</strong>
+    </p>
+
+    <div class="wolt-cta">
+      <p>Keine Lust rauszugehen? Vieles davon bringt dir Wolt nach Hause.</p>
+      <a class="btn btn-red" href={site.wolt} target="_blank" rel="noopener">
+        <WoltLabel />
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tiles {
+    display: grid;
+    gap: 0.9rem;
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tile {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+  }
+
+  .tile h3 {
+    font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  }
+
+  .tile p {
+    margin-top: 0.4rem;
+    max-width: 36ch;
+  }
+
+  .tile-photo {
+    min-height: 22rem;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .tile-photo :global(picture),
+  .tile-photo :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .tile-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.92) 5%, rgb(0 0 0 / 0.35) 50%, transparent 75%);
+  }
+
+  .tile-body {
+    position: relative;
+    z-index: 1;
+    padding: 1.5rem;
+  }
+
+  .tile-body p {
+    color: #dcdcdc;
+  }
+
+  .tile-plain {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 13rem;
+    padding: 1.5rem;
+  }
+
+  .tile-plain p {
+    color: #fff;
+  }
+
+  .tile-plain :global(.tile-icon) {
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-bottom: auto;
+    padding-bottom: 1.5rem;
+    box-sizing: content-box;
+  }
+
+  .tile-coffee {
+    background: var(--blue);
+  }
+
+  .tile-hermes {
+    background: var(--raised);
+    border: 1px solid var(--line);
+  }
+
+  .tile-hermes :global(.tile-icon) {
+    color: var(--red-light);
+  }
+
+  .adult {
+    margin-top: 1.5rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .adult strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .wolt-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+    margin-top: 3rem;
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border-radius: var(--radius);
+    border: 1px solid rgb(216 36 36 / 0.5);
+    background: rgb(216 36 36 / 0.08);
+  }
+
+  .wolt-cta p {
+    max-width: 30ch;
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-weight: 750;
+    font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+    line-height: 1.2;
+  }
+
+  @media (min-width: 640px) {
+    .tiles {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .tile-drinks {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .tiles {
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: minmax(13rem, auto);
+    }
+
+    .tile-snacks {
+      grid-column: span 5;
+      grid-row: span 2;
+    }
+
+    .tile-drinks {
+      grid-column: span 7;
+      grid-row: span 2;
+    }
+
+    .tile-coffee {
+      grid-column: span 3;
+    }
+
+    .tile-hermes {
+      grid-column: span 3;
+    }
+
+    .tile-lotto {
+      grid-column: span 6;
+      min-height: 0;
+    }
+  }
+</style>
