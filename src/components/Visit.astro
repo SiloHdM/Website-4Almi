@@ -2,6 +2,7 @@
 import { Picture } from 'astro:assets';
 import nacht from '../assets/media/ladenfront-nacht.jpeg';
 import Icon from './Icon.astro';
+import WoltLabel from './WoltLabel.astro';
 import { site } from '../data/site';
 ---
 
@@ -56,8 +57,7 @@ import { site } from '../data/site';
           Route planen
         </a>
         <a class="btn btn-red" href={site.wolt} target="_blank" rel="noopener">
-          <Icon name="bag" />
-          Bei Wolt bestellen
+          <WoltLabel />
         </a>
       </div>
     </div>

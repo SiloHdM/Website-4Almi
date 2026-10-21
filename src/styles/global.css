@@ -120,6 +120,13 @@ p {
   max-width: 16ch;
 }
 
+.inline-logo {
+  display: inline-block;
+  height: 1.05em;
+  width: auto;
+  vertical-align: -0.12em;
+}
+
 .section-lead {
   margin-top: 1.25rem;
   max-width: 58ch;

@@ -4,6 +4,7 @@ import snacks from '../assets/media/laden-snacks-gang.jpeg';
 import drinks from '../assets/media/laden-getraenke.jpeg';
 import lotto from '../assets/media/laden-lotto.jpeg';
 import Icon from './Icon.astro';
+import WoltLabel from './WoltLabel.astro';
 import { site } from '../data/site';
 ---
 
@@ -78,8 +79,7 @@ import { site } from '../data/site';
     <div class="wolt-cta">
       <p>Keine Lust rauszugehen? Vieles davon bringt dir Wolt nach Hause.</p>
       <a class="btn btn-red" href={site.wolt} target="_blank" rel="noopener">
-        <Icon name="bag" />
-        Bei Wolt bestellen
+        <WoltLabel />
       </a>
     </div>
   </div>

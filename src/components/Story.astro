@@ -1,13 +1,17 @@
 ---
 import { Picture } from 'astro:assets';
 import anfang from '../assets/media/anfang-kiosk-almi.jpeg';
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-4almi.png';
 import { site } from '../data/site';
 import Icon from './Icon.astro';
 ---
 
 <section class="section story" id="geschichte" aria-labelledby="geschichte-title">
   <div class="wrap">
-    <h2 class="section-title" id="geschichte-title">Die Geschichte von 4Almi</h2>
+    <h2 class="section-title" id="geschichte-title">
+      Die Geschichte von <Image class="inline-logo" src={logo} alt="4Almi" width={420} />
+    </h2>
 
     <div class="story-grid">
       <ol class="steps">

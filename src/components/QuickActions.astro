@@ -2,6 +2,7 @@
 // Desktop: senkrechte Wolt-Lasche am rechten Rand (wie die Lasche im Referenz-Screenshot).
 // Handy: feste Leiste unten mit Wolt und Route, erscheint nach dem Start-Bereich.
 import Icon from './Icon.astro';
+import WoltLabel from './WoltLabel.astro';
 import { site } from '../data/site';
 ---
 
@@ -12,8 +13,7 @@ import { site } from '../data/site';
 
 <div class="bottom-bar" data-bottom-bar>
   <a class="btn btn-red" href={site.wolt} target="_blank" rel="noopener">
-    <Icon name="bag" />
-    Wolt
+    <WoltLabel short />
   </a>
   <a class="btn btn-blue" href={site.maps} target="_blank" rel="noopener">
     <Icon name="map" />

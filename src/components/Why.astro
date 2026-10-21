@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-4almi.png';
+
 const reasons = [
   {
     title: 'Damit Ludwigsburg jederzeit zufrieden ist.',
@@ -20,7 +23,9 @@ const reasons = [
 
 <section class="section why" id="warum" aria-labelledby="warum-title">
   <div class="wrap">
-    <h2 class="section-title" id="warum-title">Warum 4Almi?</h2>
+    <h2 class="section-title" id="warum-title">
+      Warum <Image class="inline-logo" src={logo} alt="4Almi" width={420} />?
+    </h2>
     <p class="section-lead">
       Almi hat den Laden nicht nur aufgemacht, um Sachen zu verkaufen. Er hat ihn aufgemacht, damit
       in Ludwigsburg etwas zusammenkommt.
@@ -28,7 +33,7 @@ const reasons = [
 
     <!-- TODO: Namensgeschichte mit Almi bestätigen (erfunden nach Vorgabe, Grundlage: Anfangsbuchstaben der Tochter) -->
     <div class="name reveal">
-      <p class="name-mark" aria-hidden="true"><span class="n4">4</span><span class="nalmi">Almi</span></p>
+      <Image class="name-logo" src={logo} alt="" width={520} />
       <div>
         <h3>Woher kommt der Name?</h3>
         <p>
@@ -70,33 +75,16 @@ const reasons = [
     border: 1px solid var(--line);
   }
 
-  .name-mark {
-    font-family: var(--font-display);
-    font-stretch: 125%;
-    font-weight: 900;
-    font-size: clamp(3.5rem, 9vw, 6rem);
-    line-height: 0.9;
-    letter-spacing: -0.03em;
-  }
-
-  .name-mark span {
-    -webkit-text-stroke: 0.04em #fff;
-    paint-order: stroke fill;
-  }
-
-  .n4 {
-    color: var(--blue);
-  }
-
-  .nalmi {
-    color: var(--red);
+  .name :global(.name-logo) {
+    width: clamp(11rem, 26vw, 16rem);
+    height: auto;
   }
 
   .name h3 {
     font-size: clamp(1.4rem, 2.6vw, 1.9rem);
   }
 
-  .name p:not(.name-mark) {
+  .name p {
     margin-top: 0.6rem;
     max-width: 56ch;
     color: var(--muted);

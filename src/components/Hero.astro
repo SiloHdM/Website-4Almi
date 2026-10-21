@@ -1,7 +1,9 @@
 ---
-import { Picture } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
 import heroAlmi from '../assets/hero-almi.jpg';
+import logo from '../assets/logo-4almi.png';
 import Icon from './Icon.astro';
+import WoltLabel from './WoltLabel.astro';
 import { site } from '../data/site';
 
 // Zeilen für die Schreibmaschine. Die erste ist der Claim aus Social Media.
@@ -24,8 +26,8 @@ const lines = [site.claim, 'Mo–Sa bis 0 Uhr offen.', 'Chill mal, Ludwigsburg.'
   <div class="hero-content">
     <p class="hero-kicker">Späti &amp; Kiosk in Ludwigsburg</p>
 
-    <h1 class="wordmark" id="hero-title" aria-label="4Almi">
-      <span class="wm-4" aria-hidden="true">4</span><span class="wm-almi" aria-hidden="true">ALMI</span>
+    <h1 class="wordmark" id="hero-title">
+      <Image src={logo} alt="4Almi" widths={[640, 895]} sizes="(min-width: 900px) 44vw, 86vw" loading="eager" />
     </h1>
 
     <p class="typed">
@@ -40,8 +42,7 @@ const lines = [site.claim, 'Mo–Sa bis 0 Uhr offen.', 'Chill mal, Ludwigsburg.'
 
     <div class="hero-ctas">
       <a class="btn btn-red" href={site.wolt} target="_blank" rel="noopener">
-        <Icon name="bag" />
-        Bei Wolt bestellen
+        <WoltLabel />
       </a>
       <a class="btn btn-ghost" href="#besuch">
         <Icon name="map-pin" />
@@ -147,33 +148,16 @@ const lines = [site.claim, 'Mo–Sa bis 0 Uhr offen.', 'Chill mal, Ludwigsburg.'
     animation: rise 900ms 200ms var(--ease-out) both;
   }
 
-  /* Das eine laute Element: 4 in Logo-Blau, ALMI in Logo-Rot, weiße Kontur wie im Logo */
+  /* Das eine laute Element: das echte 4Almi-Logo, groß */
   .wordmark {
-    margin-top: 0.75rem;
-    font-size: clamp(5.5rem, 11.5vw, 14rem);
-    font-stretch: 125%;
-    font-weight: 900;
-    line-height: 0.82;
-    letter-spacing: -0.035em;
-    white-space: nowrap;
+    margin-top: 1rem;
   }
 
-  .wordmark span {
-    display: inline-block;
-    -webkit-text-stroke: 0.045em #fff;
-    paint-order: stroke fill;
-    animation: rise 1000ms var(--ease-out) both;
-  }
-
-  .wordmark .wm-4 {
-    color: var(--blue);
-    margin-right: 0.02em;
-    animation-delay: 300ms;
-  }
-
-  .wordmark .wm-almi {
-    color: var(--red);
-    animation-delay: 420ms;
+  .wordmark :global(img) {
+    width: min(100%, 40rem);
+    height: auto;
+    margin-left: -0.6%;
+    animation: rise 1000ms 300ms var(--ease-out) both;
   }
 
   /* zwei Zeilen reservieren, damit beim Tippen nichts springt */
@@ -294,8 +278,8 @@ const lines = [site.claim, 'Mo–Sa bis 0 Uhr offen.', 'Chill mal, Ludwigsburg.'
       padding-bottom: 5.5rem;
     }
 
-    .wordmark {
-      font-size: min(22vw, 9rem);
+    .wordmark :global(img) {
+      width: min(86vw, 26rem);
     }
 
     .hero-ctas .btn {
