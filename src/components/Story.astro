@@ -13,19 +13,40 @@ import Icon from './Icon.astro';
       <ol class="steps">
         <li class="step reveal">
           <h3>Zehn Jahre Wiesbaden</h3>
-          <p>Bevor es 4Almi gab, hat Almi zehn Jahre lang einen Kiosk in Wiesbaden geführt.</p>
-        </li>
-        <li class="step reveal">
-          <h3>Neustart in Ludwigsburg</h3>
           <p>
-            Dann der Umzug in die Lindenstraße 8. Am Anfang stand noch „Kiosk Almi“ über der Tür.
+            Zehn Jahre lang hat Almi in Wiesbaden einen Kiosk geführt. Dort hat er gelernt, was einen
+            guten Späti ausmacht: kalte Getränke, ein offenes Ohr und eine Tür, die abends noch auf ist.
           </p>
         </li>
         <li class="step reveal">
-          <h3>Der Plan: früher Feierabend</h3>
+          <h3>Späti-Kultur für Ludwigsburg</h3>
           <p>
-            Eigentlich wollte Almi nicht mehr bis spät in die Nacht arbeiten. Das hat nicht lange
-            gehalten.
+            In Großstädten gehört der Späti zum Leben dazu. Er ist Treffpunkt, Feierabend-Ort und
+            Rettung um halb zwölf. In Ludwigsburg fehlte so ein Ort. Also hat Almi beschlossen, den
+            Späti-Lifestyle mitzubringen.
+          </p>
+        </li>
+        <li class="step reveal">
+          <h3>Klein angefangen</h3>
+          <p>
+            Los ging es in der Lindenstraße 8, ganz einfach, mit dem alten Schild „Kiosk Almi“ über
+            der Tür.
+          </p>
+        </li>
+        <li class="step reveal">
+          <h3>Schritt für Schritt mehr</h3>
+          <p>
+            Dann hat Almi den Laden immer weiter für seine Kunden ausgebaut: Snacks und Drinks aus
+            aller Welt, Kühlschränke bis unter die Decke, Kaffee und Smoothies, Lotto und ein Hermes
+            Paketshop. Aus dem kleinen Kiosk wurde 4Almi.
+          </p>
+        </li>
+        <li class="step reveal">
+          <h3>Bis spät zusammen</h3>
+          <p>
+            Eigentlich wollte Almi nicht mehr bis spät in die Nacht arbeiten. Aber gerade abends
+            kommen die Leute zusammen: nach der Schicht, nach dem Training, auf dem Weg nach Hause.
+            Also bleibt die Tür offen, bis Mitternacht.
           </p>
         </li>
       </ol>
@@ -36,9 +57,9 @@ import Icon from './Icon.astro';
           formats={['avif', 'webp']}
           widths={[480, 900]}
           sizes="(min-width: 900px) 40vw, 100vw"
-          alt="Almi zeigt auf seinen Laden in Ludwigsburg, damals noch mit dem Schild „Kiosk Almi“"
+          alt="Almi, damals noch mit Haaren, zeigt auf seinen ersten Laden in Ludwigsburg mit dem Schild „Kiosk Almi“"
         />
-        <figcaption>So sah es ganz am Anfang aus.</figcaption>
+        <figcaption>Ganz am Anfang: Almi vor dem alten Schild „Kiosk Almi“.</figcaption>
       </figure>
     </div>
 
@@ -136,6 +157,13 @@ import Icon from './Icon.astro';
 
   .start-photo {
     margin: 0;
+  }
+
+  @media (min-width: 900px) {
+    .start-photo {
+      position: sticky;
+      top: 6rem;
+    }
   }
 
   .start-photo :global(img) {

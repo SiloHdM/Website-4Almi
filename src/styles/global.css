@@ -187,18 +187,21 @@ p {
   background: rgb(255 255 255 / 0.06);
 }
 
-/* Einmaliges Einblenden beim Scrollen, nur wo es Sinn hat */
-.js .reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity 700ms var(--ease-out),
-    transform 700ms var(--ease-out);
+/* Sanftes Einblenden beim Scrollen. Der Inhalt ist nie versteckt: Browser ohne
+   scroll-gesteuerte Animationen zeigen ihn einfach sofort an. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
 }
 
-.js .reveal.is-visible {
-  opacity: 1;
-  transform: none;
+@keyframes reveal {
+  from {
+    opacity: 0.15;
+    transform: translateY(24px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -214,8 +217,7 @@ p {
     transition-duration: 0.01ms !important;
   }
 
-  .js .reveal {
-    opacity: 1;
-    transform: none;
+  .reveal {
+    animation: none;
   }
 }
