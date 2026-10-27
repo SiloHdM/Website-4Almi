@@ -1,0 +1,106 @@
+---
+// Desktop: senkrechte Wolt-Lasche am rechten Rand (wie die Lasche im Referenz-Screenshot).
+// Handy: feste Leiste unten mit Wolt und Route, erscheint nach dem Start-Bereich.
+import { Image } from 'astro:assets';
+import woltLogo from '../assets/wolt-logo.png';
+import Icon from './Icon.astro';
+import WoltLabel from './WoltLabel.astro';
+import { site } from '../data/site';
+---
+
+<a class="side-tab" href={site.wolt} target="_blank" rel="noopener">
+  <Image class="side-tab-logo" src={woltLogo} alt="" height={48} />
+  <span class="side-tab-label">Bestellen bei Wolt</span>
+</a>
+
+<div class="bottom-bar" data-bottom-bar>
+  <a class="btn btn-wolt" href={site.wolt} target="_blank" rel="noopener">
+    <WoltLabel short />
+  </a>
+  <a class="btn btn-blue" href={site.maps} target="_blank" rel="noopener">
+    <Icon name="map" />
+    Route
+  </a>
+</div>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('[data-bottom-bar]');
+  const toggle = () => bar?.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.8);
+  toggle();
+  window.addEventListener('scroll', toggle, { passive: true });
+</script>
+
+<style>
+  .side-tab {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    z-index: 90;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.1rem 0.85rem 1.4rem;
+    translate: 0 -50%;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    border-radius: 10px 0 0 10px;
+    transition: padding-right 200ms var(--ease-out);
+  }
+
+  .side-tab:hover {
+    padding-right: 1.15rem;
+  }
+
+  .side-tab :global(.side-tab-logo) {
+    width: 2.6rem;
+    height: auto;
+  }
+
+  .side-tab-label {
+    writing-mode: vertical-rl;
+    rotate: 180deg;
+    font-weight: 650;
+    font-size: 0.9375rem;
+  }
+
+  .bottom-bar {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 90;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    padding: 0.75rem var(--gutter) calc(0.75rem + env(safe-area-inset-bottom));
+    background: rgb(0 0 0 / 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line);
+    translate: 0 110%;
+    visibility: hidden;
+    transition:
+      translate 300ms var(--ease-out),
+      visibility 0s 300ms;
+  }
+
+  .bottom-bar.is-visible {
+    translate: 0 0;
+    visibility: visible;
+    transition: translate 300ms var(--ease-out);
+  }
+
+  .bottom-bar .btn {
+    min-height: 3rem;
+  }
+
+  @media (min-width: 900px) {
+    .side-tab {
+      display: flex;
+    }
+
+    .bottom-bar {
+      display: none;
+    }
+  }
+</style>
