@@ -111,13 +111,19 @@ const photos = [
     display: inline-grid;
   }
 
+  .gallery li :global(picture) {
+    display: block;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+  }
+
   .gallery :global(img) {
     width: auto;
     height: clamp(20rem, 62vw, 30rem);
     max-width: 88vw;
     object-fit: cover;
-    border-radius: var(--radius);
   }
+
 
   .gallery figcaption {
     width: 0;
@@ -167,6 +173,16 @@ const photos = [
     .gallery {
       padding-inline: max(var(--gutter), (100vw - var(--max)) / 2);
       scroll-padding-inline: max(var(--gutter), (100vw - var(--max)) / 2);
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .gallery li :global(img) {
+      transition: transform 600ms var(--ease-out);
+    }
+
+    .gallery li:hover :global(img) {
+      transform: scale(1.03);
     }
   }
 </style>

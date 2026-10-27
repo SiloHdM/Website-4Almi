@@ -41,7 +41,7 @@ const lines = [site.claim, 'Mo–Sa bis 0 Uhr offen.', 'Chill mal, Ludwigsburg.'
     </p>
 
     <div class="hero-ctas">
-      <a class="btn btn-red" href={site.wolt} target="_blank" rel="noopener">
+      <a class="btn btn-wolt" href={site.wolt} target="_blank" rel="noopener">
         <WoltLabel />
       </a>
       <a class="btn btn-ghost" href="#besuch">
@@ -162,12 +162,13 @@ const lines = [site.claim, 'Mo–Sa bis 0 Uhr offen.', 'Chill mal, Ludwigsburg.'
 
   /* zwei Zeilen reservieren, damit beim Tippen nichts springt */
   .typed {
-    margin-top: clamp(1.5rem, 3vw, 2.5rem);
-    min-height: 2.2em;
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+    min-height: 1.15em;
+    white-space: nowrap;
     font-family: var(--font-display);
     font-stretch: 110%;
     font-weight: 850;
-    font-size: clamp(1.6rem, 3.3vw, 3rem);
+    font-size: clamp(1.5rem, 2.5vw, 2.4rem);
     line-height: 1.1;
     letter-spacing: -0.02em;
     animation: rise 900ms 600ms var(--ease-out) both;
@@ -253,7 +254,18 @@ const lines = [site.claim, 'Mo–Sa bis 0 Uhr offen.', 'Chill mal, Ludwigsburg.'
   }
 
   /* Handy: Foto oben, Schriftzug überlappt die Unterkante */
+  @media (max-height: 820px) {
+    .scroll-hint {
+      display: none;
+    }
+  }
+
   @media (max-width: 899px) {
+    .typed {
+      white-space: normal;
+      min-height: 2.3em;
+    }
+
     .hero {
       grid-template-columns: minmax(0, 1fr);
       grid-template-rows: auto auto;

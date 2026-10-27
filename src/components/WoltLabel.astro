@@ -1,37 +1,26 @@
 ---
-// Inhalt für Wolt-Buttons. Liegt das offizielle Wolt-Logo als src/assets/wolt-logo.svg
-// (oder .png) im Projekt, zeigt der Button "Bestellen bei" + Logo. Sonst Icon + Text.
-import Icon from './Icon.astro';
+// Inhalt für Wolt-Buttons: "Bestellen bei" + offizielles Wolt-Logo.
+// Auf hellem Button das cyanfarbene Logo, auf farbigem Grund die weiße Variante.
+import { Image } from 'astro:assets';
+import woltLogo from '../assets/wolt-logo.png';
+import woltLogoWeiss from '../assets/wolt-logo-weiss.png';
 
 interface Props {
   short?: boolean;
+  white?: boolean;
 }
 
-const { short = false } = Astro.props;
-const found = Object.values(
-  import.meta.glob<{ default: ImageMetadata }>('../assets/wolt-logo.{svg,png,webp}', { eager: true }),
-)[0];
-const logo = found?.default;
+const { short = false, white = false } = Astro.props;
 ---
 
-{
-  logo ? (
-    <>
-      {!short && <span>Bestellen bei</span>}
-      <img class="wolt-logo" src={logo.src} alt="Wolt" width={logo.width} height={logo.height} />
-    </>
-  ) : (
-    <>
-      <Icon name="bag" />
-      {short ? 'Wolt' : 'Bei Wolt bestellen'}
-    </>
-  )
-}
+{!short && <span>Bestellen bei</span>}
+<Image class="wolt-logo" src={white ? woltLogoWeiss : woltLogo} alt="Wolt" height={48} />
 
 <style>
   .wolt-logo {
     display: block;
-    height: 1.05em;
+    height: 1.25em;
     width: auto;
+    margin-block: -0.1em;
   }
 </style>

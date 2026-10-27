@@ -87,6 +87,27 @@ const links = [
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  // Aktiven Abschnitt im Menü markieren
+  const navLinks = [...document.querySelectorAll<HTMLAnchorElement>('.header-nav a')];
+  const spy = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        for (const a of navLinks) {
+          const active = a.hash === `#${e.target.id}`;
+          a.classList.toggle('is-active', active);
+          if (active) a.setAttribute('aria-current', 'true');
+          else a.removeAttribute('aria-current');
+        }
+      }
+    },
+    { rootMargin: '-45% 0px -50% 0px' },
+  );
+  navLinks.forEach((a) => {
+    const target = a.hash && document.querySelector(a.hash);
+    if (target) spy.observe(target);
+  });
+
   // Mobiles Menü
   const btn = document.querySelector<HTMLButtonElement>('[data-menu-btn]');
   const nav = document.querySelector<HTMLElement>('[data-nav]');
@@ -163,8 +184,13 @@ const links = [
     transition: color 150ms ease;
   }
 
-  .header-nav a:hover {
+  .header-nav a:hover,
+  .header-nav a.is-active {
     color: #fff;
+  }
+
+  .header-nav a.is-active {
+    background: rgb(255 255 255 / 0.08);
   }
 
   .status {

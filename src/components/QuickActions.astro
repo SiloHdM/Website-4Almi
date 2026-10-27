@@ -1,18 +1,20 @@
 ---
 // Desktop: senkrechte Wolt-Lasche am rechten Rand (wie die Lasche im Referenz-Screenshot).
 // Handy: feste Leiste unten mit Wolt und Route, erscheint nach dem Start-Bereich.
+import { Image } from 'astro:assets';
+import woltLogo from '../assets/wolt-logo.png';
 import Icon from './Icon.astro';
 import WoltLabel from './WoltLabel.astro';
 import { site } from '../data/site';
 ---
 
 <a class="side-tab" href={site.wolt} target="_blank" rel="noopener">
-  <span class="side-tab-mark" aria-hidden="true">W.</span>
-  <span class="side-tab-label">Bei Wolt bestellen</span>
+  <Image class="side-tab-logo" src={woltLogo} alt="" height={48} />
+  <span class="side-tab-label">Bestellen bei Wolt</span>
 </a>
 
 <div class="bottom-bar" data-bottom-bar>
-  <a class="btn btn-red" href={site.wolt} target="_blank" rel="noopener">
+  <a class="btn btn-wolt" href={site.wolt} target="_blank" rel="noopener">
     <WoltLabel short />
   </a>
   <a class="btn btn-blue" href={site.maps} target="_blank" rel="noopener">
@@ -51,13 +53,9 @@ import { site } from '../data/site';
     padding-right: 1.15rem;
   }
 
-  .side-tab-mark {
-    font-family: var(--font-display);
-    font-stretch: 112%;
-    font-weight: 900;
-    font-size: 1.4rem;
-    line-height: 1;
-    color: var(--red);
+  .side-tab :global(.side-tab-logo) {
+    width: 2.6rem;
+    height: auto;
   }
 
   .side-tab-label {

@@ -78,7 +78,7 @@ import { site } from '../data/site';
 
     <div class="wolt-cta">
       <p>Keine Lust rauszugehen? Vieles davon bringt dir Wolt nach Hause.</p>
-      <a class="btn btn-red" href={site.wolt} target="_blank" rel="noopener">
+      <a class="btn btn-wolt" href={site.wolt} target="_blank" rel="noopener">
         <WoltLabel />
       </a>
     </div>
@@ -97,7 +97,7 @@ import { site } from '../data/site';
   .tile {
     position: relative;
     overflow: hidden;
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
   }
 
   .tile h3 {
@@ -244,6 +244,16 @@ import { site } from '../data/site';
     .tile-lotto {
       grid-column: span 6;
       min-height: 0;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .tile-photo :global(img) {
+      transition: transform 600ms var(--ease-out);
+    }
+
+    .tile-photo:hover :global(img) {
+      transform: scale(1.03);
     }
   }
 </style>
