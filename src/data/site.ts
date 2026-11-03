@@ -28,7 +28,7 @@ export const site = {
   ],
   // Impressum. Eine E-Mail-Adresse ist nach § 5 DDG Pflicht; Telefon ist freiwillig.
   // Beides hier eintragen, dann erscheinen sie im Impressum und in der Datenschutzerklärung.
-  email: '', // TODO: E-Mail-Adresse eintragen
+  email: '4almi@web.de',
   phone: '',
   vatId: 'DE281061812',
 };
