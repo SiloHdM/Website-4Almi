@@ -71,7 +71,13 @@ import { site } from '../data/site';
           Die Karte kommt von Google Maps. Erst wenn du sie lädst, werden Daten an Google
           übertragen. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.
         </p>
-        <button class="btn btn-ghost" type="button" data-map-load>Karte laden</button>
+        <div class="map-actions">
+          <button class="btn btn-ghost" type="button" data-map-load>Karte laden</button>
+          <a class="map-link" href={site.maps} target="_blank" rel="noopener">
+            In Google Maps öffnen
+            <Icon name="external" />
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -192,6 +198,33 @@ import { site } from '../data/site';
     gap: 1.25rem;
     padding: 2rem 1.5rem;
     text-align: center;
+  }
+
+  .map-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem 1.5rem;
+  }
+
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.75rem;
+    color: var(--blue-light);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .map-link:hover {
+    text-decoration: underline;
+  }
+
+  .map-link :global(svg) {
+    width: 1rem;
+    height: 1rem;
   }
 
   .map-consent p {
