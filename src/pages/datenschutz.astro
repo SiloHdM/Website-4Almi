@@ -1,0 +1,178 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../data/site';
+---
+
+<Legal title="Datenschutzerklärung">
+  <p>
+    Wir freuen uns über deinen Besuch. Hier erklären wir, welche personenbezogenen Daten beim Besuch
+    dieser Website verarbeitet werden, wozu und auf welcher Rechtsgrundlage. Kurz gesagt: Diese
+    Website setzt keine Cookies, nutzt keine Analyse- oder Werbedienste und hat kein Kontaktformular.
+  </p>
+
+  <h2>1. Verantwortlicher</h2>
+  <p>
+    Verantwortlich für die Datenverarbeitung auf dieser Website im Sinne der
+    Datenschutz-Grundverordnung (DSGVO) ist:
+  </p>
+  <p>
+    4Almi, Inhaber: {site.ownerLegal}<br />
+    {site.street}<br />
+    {site.zip} {site.city}<br />
+    {
+      site.email ? (
+        <>E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a></>
+      ) : (
+        <span class="todo">E-Mail: [TODO: E-Mail-Adresse eintragen]</span>
+      )
+    }
+    {site.phone && (<><br />Telefon: {site.phone}</>)}
+  </p>
+  <p>
+    Einen Datenschutzbeauftragten haben wir nicht benannt, weil wir dazu gesetzlich nicht
+    verpflichtet sind.
+  </p>
+
+  <h2>2. Hosting und Server-Logfiles</h2>
+  <p>
+    Diese Website wird bei Netlify gehostet, einem Angebot der Netlify, Inc., San Francisco, USA.
+    Bei jedem Aufruf der Website speichert der Server automatisch Informationen, die dein
+    Browser übermittelt (Server-Logfiles):
+  </p>
+  <ul>
+    <li>IP-Adresse des anfragenden Geräts</li>
+    <li>Datum und Uhrzeit des Zugriffs</li>
+    <li>aufgerufene Seite und übertragene Datenmenge</li>
+    <li>Website, von der aus du zu uns gekommen bist (Referrer)</li>
+    <li>verwendeter Browser und Betriebssystem</li>
+  </ul>
+  <p>
+    Diese Daten brauchen wir, um die Website auszuliefern und ihren sicheren und stabilen Betrieb zu
+    gewährleisten, etwa um Angriffe zu erkennen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.
+    Unser berechtigtes Interesse liegt in einer technisch fehlerfreien und sicheren Bereitstellung
+    der Website. Die Logfiles werden nach
+    <span class="todo">[TODO: Speicherdauer laut Hosting-Anbieter, z. B. 7 Tage]</span> gelöscht,
+    sofern sie nicht zur Aufklärung eines Sicherheitsvorfalls länger benötigt werden. Mit dem
+    Hosting-Anbieter haben wir einen Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO
+    geschlossen. Netlify kann Daten auch auf Servern in den USA verarbeiten; die Übermittlung stützt
+    sich auf die EU-Standardvertragsklauseln bzw. das EU-US Data Privacy Framework. Mehr dazu:
+    <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">netlify.com/privacy</a>.
+  </p>
+
+  <h2>3. SSL- bzw. TLS-Verschlüsselung</h2>
+  <p>
+    Diese Website nutzt aus Sicherheitsgründen eine SSL- bzw. TLS-Verschlüsselung. Eine
+    verschlüsselte Verbindung erkennst du am „https://“ in der Adresszeile deines Browsers.
+  </p>
+
+  <h2>4. Keine Cookies, keine Analyse, kein Tracking</h2>
+  <p>
+    Wir setzen keine Cookies und verwenden keine Analyse-, Tracking- oder Werbedienste. Die Anzeige
+    „Jetzt offen“ im Kopfbereich wird ausschließlich in deinem Browser anhand der Uhrzeit berechnet;
+    dabei werden keine Daten an uns oder Dritte übertragen.
+  </p>
+
+  <h2>5. Schriftarten</h2>
+  <p>
+    Die Schriftarten dieser Website liegen auf unserem eigenen Server und werden von dort geladen.
+    Es wird keine Verbindung zu Google Fonts oder anderen Schriftanbietern aufgebaut.
+  </p>
+
+  <h2>6. Karte von Google Maps (nur nach Klick)</h2>
+  <p>
+    Im Abschnitt „Komm vorbei“ kannst du eine Karte von Google Maps anzeigen lassen. Anbieter ist
+    Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Die Karte wird erst
+    geladen, wenn du auf „Karte laden“ klickst. Vorher wird keine Verbindung zu Google aufgebaut.
+  </p>
+  <p>
+    Nach deinem Klick überträgt dein Browser Daten wie deine IP-Adresse, Datum und Uhrzeit sowie
+    Angaben zu Browser und Gerät an Google. Google kann dabei Cookies oder ähnliche Technologien
+    einsetzen und Daten auch an Server in den USA übermitteln. Für die Übermittlung in die USA stützt
+    sich Google auf den Angemessenheitsbeschluss der EU-Kommission zum EU-US Data Privacy Framework.
+    Rechtsgrundlage ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG,
+    die du mit dem Klick erteilst. Du kannst sie jederzeit für die Zukunft widerrufen, indem du die
+    Seite neu lädst; die Karte wird dann nicht mehr angezeigt.
+  </p>
+  <p>
+    Mehr dazu in der Datenschutzerklärung von Google:
+    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.
+  </p>
+
+  <h2>7. Links zu Wolt, sozialen Netzwerken und anderen Websites</h2>
+  <p>
+    Auf dieser Website verlinken wir auf Wolt, TikTok, Instagram, Google Maps (Routenplanung) und die
+    Stuttgarter Zeitung. Es handelt sich um einfache Links, keine eingebetteten Inhalte: Solange du
+    nicht darauf klickst, werden keine Daten an diese Anbieter übertragen. Erst wenn du einen Link
+    anklickst, öffnet sich die Seite des jeweiligen Anbieters, und es gilt dessen
+    Datenschutzerklärung:
+  </p>
+  <ul>
+    <li>
+      Wolt (Wolt Enterprises Oy, Helsinki):
+      <a href="https://wolt.com/de/privacy" target="_blank" rel="noopener">wolt.com/de/privacy</a>
+    </li>
+    <li>
+      TikTok (TikTok Technology Limited, Dublin):
+      <a href="https://www.tiktok.com/legal/privacy-policy-eea" target="_blank" rel="noopener">tiktok.com/legal/privacy-policy-eea</a>
+    </li>
+    <li>
+      Instagram (Meta Platforms Ireland Limited, Dublin):
+      <a href="https://privacycenter.instagram.com/policy" target="_blank" rel="noopener">privacycenter.instagram.com/policy</a>
+    </li>
+    <li>
+      Google Maps (Google Ireland Limited, Dublin):
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>
+    </li>
+  </ul>
+  <p>
+    Bestellungen über Wolt laufen vollständig über Wolt. Für die Verarbeitung deiner Bestelldaten ist
+    Wolt verantwortlich.
+  </p>
+
+  <h2>8. Kontakt per E-Mail</h2>
+  <p>
+    Wenn du uns per E-Mail schreibst, verarbeiten wir deine Angaben (E-Mail-Adresse, Name, Inhalt
+    der Nachricht), um deine Anfrage zu beantworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO,
+    wenn deine Anfrage mit einem Vertrag oder seiner Anbahnung zusammenhängt, sonst Art. 6 Abs. 1
+    lit. f DSGVO (unser berechtigtes Interesse an der Beantwortung). Wir löschen die Daten, sobald
+    die Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
+  </p>
+
+  <h2>9. Deine Rechte</h2>
+  <p>Du hast im Rahmen der gesetzlichen Vorgaben jederzeit das Recht auf:</p>
+  <ul>
+    <li>Auskunft über deine gespeicherten Daten (Art. 15 DSGVO)</li>
+    <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+    <li>Löschung (Art. 17 DSGVO)</li>
+    <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+    <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+    <li>Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)</li>
+  </ul>
+  <p>
+    <strong>Widerspruchsrecht (Art. 21 DSGVO):</strong> Verarbeiten wir Daten auf Grundlage von
+    Art. 6 Abs. 1 lit. f DSGVO, kannst du aus Gründen, die sich aus deiner besonderen Situation
+    ergeben, jederzeit widersprechen.
+  </p>
+  <p>
+    Für alle Anfragen genügt eine formlose Nachricht an die oben genannten Kontaktdaten.
+  </p>
+
+  <h2>10. Beschwerderecht bei der Aufsichtsbehörde</h2>
+  <p>
+    Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Für uns zuständig
+    ist:
+  </p>
+  <p>
+    Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Baden-Württemberg<br />
+    Lautenschlagerstraße 20, 70173 Stuttgart<br />
+    <a href="https://www.baden-wuerttemberg.datenschutz.de" target="_blank" rel="noopener">www.baden-wuerttemberg.datenschutz.de</a>
+  </p>
+
+  <h2>11. Änderungen</h2>
+  <p>
+    Wir passen diese Datenschutzerklärung an, wenn sich die Website oder die Rechtslage ändert, zum
+    Beispiel wenn wir später Videos von TikTok oder Instagram direkt einbetten. Es gilt die jeweils
+    hier veröffentlichte Fassung.
+  </p>
+  <p>Stand: November 2026</p>
+</Legal>

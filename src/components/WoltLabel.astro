@@ -1,0 +1,26 @@
+---
+// Inhalt für Wolt-Buttons: "Bestellen bei" + offizielles Wolt-Logo.
+// Auf hellem Button das cyanfarbene Logo, auf farbigem Grund die weiße Variante.
+import { Image } from 'astro:assets';
+import woltLogo from '../assets/wolt-logo.png';
+import woltLogoWeiss from '../assets/wolt-logo-weiss.png';
+
+interface Props {
+  short?: boolean;
+  white?: boolean;
+}
+
+const { short = false, white = false } = Astro.props;
+---
+
+{!short && <span>Bestellen bei</span>}
+<Image class="wolt-logo" src={white ? woltLogoWeiss : woltLogo} alt="Wolt" height={48} />
+
+<style>
+  .wolt-logo {
+    display: block;
+    height: 1.25em;
+    width: auto;
+    margin-block: -0.1em;
+  }
+</style>

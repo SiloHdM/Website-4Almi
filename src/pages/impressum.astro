@@ -1,0 +1,78 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../data/site';
+---
+
+<Legal title="Impressum">
+  <h2>Angaben gemäß § 5 DDG</h2>
+  <p>
+    4Almi<br />
+    Inhaber: {site.ownerLegal}<br />
+    {site.street}<br />
+    {site.zip} {site.city}<br />
+    Deutschland
+  </p>
+
+  <h2>Kontakt</h2>
+  <p>
+    {
+      site.email ? (
+        <>E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a></>
+      ) : (
+        <span class="todo">E-Mail: [TODO: E-Mail-Adresse eintragen]</span>
+      )
+    }
+    {site.phone && (<><br />Telefon: {site.phone}</>)}
+  </p>
+
+  <h2>Umsatzsteuer-ID</h2>
+  <p>
+    Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br />
+    {site.vatId}
+  </p>
+
+  <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+  <p>
+    {site.ownerLegal}<br />
+    {site.street}, {site.zip} {site.city}
+  </p>
+
+  <h2>Verbraucherstreitbeilegung</h2>
+  <p>
+    Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer
+    Verbraucherschlichtungsstelle teilzunehmen.
+  </p>
+
+  <h2>Haftung für Inhalte</h2>
+  <p>
+    Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
+    verantwortlich. Wir sind jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
+    Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
+    Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen
+    nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist erst ab
+    dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Sobald wir von
+    entsprechenden Rechtsverletzungen erfahren, entfernen wir diese Inhalte umgehend.
+  </p>
+
+  <h2>Haftung für Links</h2>
+  <p>
+    Diese Website enthält Links zu externen Websites Dritter, zum Beispiel Wolt, TikTok, Instagram,
+    Google Maps und die Stuttgarter Zeitung. Auf deren Inhalte haben wir keinen Einfluss, deshalb
+    übernehmen wir dafür keine Gewähr. Für die Inhalte der verlinkten Seiten ist stets der jeweilige
+    Anbieter oder Betreiber verantwortlich. Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße
+    erkennbar. Werden uns Rechtsverletzungen bekannt, entfernen wir die betreffenden Links umgehend.
+  </p>
+
+  <h2>Urheberrecht und Marken</h2>
+  <p>
+    Die Inhalte dieser Website, insbesondere Texte, Fotos und das 4Almi-Logo, unterliegen dem
+    deutschen Urheberrecht. Vervielfältigung, Bearbeitung und Verbreitung außerhalb der Grenzen des
+    Urheberrechts brauchen die schriftliche Zustimmung von 4Almi. Die Fotos der Fußballmannschaften
+    zeigen Vereine, die 4Almi unterstützt.
+  </p>
+  <p>
+    Das Wolt-Logo ist eine Marke der Wolt Enterprises Oy und wird nur verwendet, um auf die
+    Bestellmöglichkeit über Wolt hinzuweisen. Lotto Baden-Württemberg und Hermes sind Marken ihrer
+    jeweiligen Inhaber.
+  </p>
+</Legal>
