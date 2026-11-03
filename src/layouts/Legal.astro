@@ -14,9 +14,6 @@ const { title } = Astro.props;
   <Header home={false} />
   <main id="inhalt" class="legal">
     <div class="wrap">
-      <p class="draft">
-        Vorlage: Dieser Rechtstext muss vor dem Livegang geprüft und vervollständigt werden.
-      </p>
       <h1>{title}</h1>
       <div class="legal-body">
         <slot />
@@ -31,18 +28,10 @@ const { title } = Astro.props;
     padding-block: 8rem 5rem;
   }
 
-  .draft {
-    display: inline-block;
-    margin-bottom: 2rem;
-    padding: 0.6rem 1rem;
-    border-radius: 10px;
-    border: 1px solid rgb(216 36 36 / 0.6);
-    background: rgb(216 36 36 / 0.1);
-    font-size: 0.9375rem;
-  }
-
   h1 {
-    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    font-size: clamp(2.25rem, 7vw, 4.5rem);
+    hyphens: auto;
+    overflow-wrap: break-word;
   }
 
   .legal-body {
@@ -61,8 +50,17 @@ const { title } = Astro.props;
     color: #d6d6d6;
   }
 
+  .legal-body :global(li) {
+    margin-top: 0.3rem;
+  }
+
+  .legal-body :global(strong) {
+    color: var(--text);
+  }
+
   .legal-body :global(a) {
     color: var(--blue-light);
+    overflow-wrap: anywhere;
   }
 
   .legal-body :global(.todo) {

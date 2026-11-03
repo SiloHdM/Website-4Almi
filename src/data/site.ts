@@ -26,8 +26,9 @@ export const site = {
     { label: 'TikTok', handle: '@4_almi', url: 'https://www.tiktok.com/@4_almi' },
     { label: 'Instagram', handle: '@4_almi', url: 'https://www.instagram.com/4_almi/' },
   ],
-  // TODO: Telefon, E-Mail und USt-IdNr. für das Impressum
-  phone: '[TODO: Telefonnummer]',
-  email: '[TODO: E-Mail-Adresse]',
-  vatId: '[TODO: USt-IdNr., falls vorhanden]',
+  // Impressum. Eine E-Mail-Adresse ist nach § 5 DDG Pflicht; Telefon ist freiwillig.
+  // Beides hier eintragen, dann erscheinen sie im Impressum und in der Datenschutzerklärung.
+  email: '', // TODO: E-Mail-Adresse eintragen
+  phone: '',
+  vatId: 'DE281061812',
 };
