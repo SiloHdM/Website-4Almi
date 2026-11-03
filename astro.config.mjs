@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 
-// TODO: echte Domain eintragen, sobald sie feststeht (für Canonical-URLs und Social-Vorschau).
+// Netlify setzt beim Build URL auf die Hauptadresse der Seite (eigene Domain, sobald verbunden).
+// Wird für die Vorschau beim Teilen (og:image) und die Firmendaten für Google gebraucht.
 export default defineConfig({
-  site: 'https://example.com',
+  site: process.env.URL ?? 'http://localhost:4321',
 });
