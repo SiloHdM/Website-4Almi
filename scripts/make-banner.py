@@ -10,7 +10,6 @@ from PIL import Image, ImageChops, ImageDraw, ImageEnhance, ImageFilter, ImageFo
 M = 'src/assets/media/'
 W, H = 2400, 560
 FONT_BLACK = '/usr/share/fonts/opentype/inter/InterDisplay-Black.otf'
-FONT_BOLD = '/usr/share/fonts/opentype/inter/Inter-Bold.otf'
 
 
 def cover(img, w, h, focus_y=0.5):
@@ -91,10 +90,6 @@ canvas.alpha_composite(burst)
 # Almi als Karikatur ganz rechts
 kari = Image.open('src/assets/almi-karikatur.png').convert('RGBA').resize((330, 330), Image.LANCZOS)
 canvas.alpha_composite(kari, (W - 330 - 40, H - 330 - 50))
-
-# 5. TikTok-Name links unten
-d = ImageDraw.Draw(canvas)
-d.text((60, H - 78), '@4almilb', font=ImageFont.truetype(FONT_BOLD, 40), fill=(255, 255, 255, 235))
 
 canvas.convert('RGB').save('src/assets/banner-4almi.png')
 print('banner', canvas.size)
