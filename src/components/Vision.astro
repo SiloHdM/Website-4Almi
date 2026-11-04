@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-4almi.png';
+---
+
+<section class="section vision" id="zukunft" aria-labelledby="zukunft-title">
+  <div class="wrap vision-grid">
+    <div>
+      <h2 class="section-title" id="zukunft-title">4Almi denkt größer.</h2>
+      <p class="section-lead">
+        Hinter 4Almi steckt mehr als ein einzelner Laden. Almi plant, in Zukunft weitere Läden zu
+        eröffnen. Die Idee bleibt dieselbe: Vielfalt, Kundennähe und ein Ort, an dem Menschen
+        zusammenkommen.
+      </p>
+      <p class="section-lead">
+        Den Namen 4Almi wird trotzdem nur einer tragen: der Laden in Ludwigsburg. Er war der erste,
+        und er bleibt das Original.
+      </p>
+    </div>
+
+    <div class="original reveal">
+      <Image class="original-logo" src={logo} alt="" width={520} />
+      <p>Das Original.<br />Nur in Ludwigsburg.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vision {
+    background: radial-gradient(60rem 34rem at 85% 50%, rgb(0 120 180 / 0.16), transparent 70%);
+  }
+
+  .vision-grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .original {
+    display: grid;
+    justify-items: center;
+    gap: 1.25rem;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--raised);
+    text-align: center;
+  }
+
+  .original :global(.original-logo) {
+    width: min(100%, 18rem);
+    height: auto;
+  }
+
+  .original p {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 850;
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    line-height: 1.1;
+  }
+
+  @media (min-width: 900px) {
+    .vision-grid {
+      grid-template-columns: 1.3fr 1fr;
+      gap: 5rem;
+    }
+  }
+</style>

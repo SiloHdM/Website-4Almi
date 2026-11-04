@@ -1,7 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
+import Banner from '../components/Banner.astro';
 import Hero from '../components/Hero.astro';
+import Quote from '../components/Quote.astro';
+import Ludwigsburg from '../components/Ludwigsburg.astro';
+import Vision from '../components/Vision.astro';
 import Story from '../components/Story.astro';
 import Why from '../components/Why.astro';
 import Sortiment from '../components/Sortiment.astro';
@@ -14,16 +18,20 @@ import QuickActions from '../components/QuickActions.astro';
 
 <Base
   title="4Almi – Späti & Kiosk in Ludwigsburg, Mo–Sa bis 0 Uhr"
-  description="4Almi in der Lindenstraße 8: der Späti in Ludwigsburg, der wirklich bis spät offen hat. Mo–Sa 9:30–0 Uhr. Snacks aus aller Welt, ausgefallene Drinks, Kaffee, Lotto, Hermes Paketshop und Lieferung über Wolt."
+  description="4Almi in der Lindenstraße 8: der Späti in Ludwigsburg, der wirklich bis spät offen hat. Mo–Sa 9–0 Uhr. Snacks aus aller Welt, ausgefallene Drinks, Kaffee, Lotto, Hermes Paketshop und Lieferung über Wolt."
 >
   <Header />
   <main id="inhalt">
+    <Banner />
     <Hero />
+    <Community />
     <Story />
+    <Quote />
+    <Ludwigsburg />
     <Why />
     <Sortiment />
     <Sponsoring />
-    <Community />
+    <Vision />
     <Visit />
   </main>
   <Footer />

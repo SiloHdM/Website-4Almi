@@ -12,10 +12,10 @@ const { home = true } = Astro.props;
 const base = home ? '' : '/';
 
 const links = [
+  { href: `${base}#community`, label: 'Community' },
   { href: `${base}#geschichte`, label: 'Geschichte' },
   { href: `${base}#sortiment`, label: 'Sortiment' },
   { href: `${base}#sponsoring`, label: 'Sponsoring' },
-  { href: `${base}#community`, label: 'Community' },
   { href: `${base}#besuch`, label: 'Besuch' },
 ];
 ---
@@ -52,7 +52,7 @@ const links = [
 </header>
 
 <script>
-  // Öffnungsstatus live nach Berliner Zeit: Mo–Sa 9:30–24:00, So zu.
+  // Öffnungsstatus live nach Berliner Zeit: Mo–Sa 9:00–24:00, So zu.
   function updateStatus() {
     const el = document.querySelector<HTMLElement>('[data-status]');
     const text = document.querySelector<HTMLElement>('[data-status-text]');
@@ -70,12 +70,12 @@ const links = [
     const minutes = Number(get('hour')) * 60 + Number(get('minute'));
 
     const isSunday = day === 'So';
-    const isOpen = !isSunday && minutes >= 9 * 60 + 30;
+    const isOpen = !isSunday && minutes >= 9 * 60;
 
     el.dataset.open = String(isOpen);
     if (isOpen) text.textContent = 'Jetzt offen · bis 0 Uhr';
-    else if (isSunday) text.textContent = 'Heute zu · Mo ab 9:30';
-    else text.textContent = 'Gerade zu · ab 9:30';
+    else if (isSunday) text.textContent = 'Heute zu · Mo ab 9 Uhr';
+    else text.textContent = 'Gerade zu · ab 9 Uhr';
   }
 
   updateStatus();

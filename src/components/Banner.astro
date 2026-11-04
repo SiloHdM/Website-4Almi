@@ -1,0 +1,46 @@
+---
+// Banner ganz oben, nach dem Vorbild der alten Website. Erzeugt mit scripts/make-banner.py.
+import { Picture } from 'astro:assets';
+import banner from '../assets/banner-4almi.png';
+---
+
+<div class="banner-wrap">
+  <Picture
+    class="banner"
+    src={banner}
+    formats={['avif', 'webp']}
+    widths={[800, 1400, 2400]}
+    sizes="(min-width: 1500px) 1440px, 100vw"
+    alt="4Almi-Banner: Graffiti „Chill mal Ludwigsburg“, das 4Almi-Logo und Almi als Karikatur mit der Sprechblase „Was geht ab?!“ vor Fotos aus dem Laden"
+    loading="eager"
+    fetchpriority="high"
+  />
+</div>
+
+<style>
+  .banner-wrap {
+    width: min(100% - 2 * var(--gutter), 90rem);
+    margin: 5rem auto 0;
+  }
+
+  .banner-wrap :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+  }
+
+  /* Auf dem Handy wäre das breite Banner winzig: Mitte mit dem Logo größer zeigen */
+  @media (max-width: 699px) {
+    .banner-wrap {
+      width: 100%;
+      margin-top: 4.25rem;
+    }
+
+    .banner-wrap :global(img) {
+      height: 9.5rem;
+      object-fit: cover;
+      object-position: 50% 50%;
+      border-radius: 0;
+    }
+  }
+</style>
